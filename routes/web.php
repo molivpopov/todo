@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth', 'namespace' => 'ToDo', 'prefix' => 'todo'], function () {
+    Route::get('/edit/{id?}', 'EditToDoController@index')->name('index');
+    Route::post('/edit/apply', 'EditToDoController@edit')->name('apply');
+});
