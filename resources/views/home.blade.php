@@ -5,7 +5,7 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/functions.js') }}" defer></script>
+    <script src="{{ asset('js/home/functions.js') }}" defer></script>
 @endsection
 
 @section('content')

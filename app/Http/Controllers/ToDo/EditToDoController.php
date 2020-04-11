@@ -37,6 +37,11 @@ class EditToDoController extends Controller
             $valid
         );
 
+        if ($request->get('notification') == 'true'){
+            dd('send mail');
+            // todo: send email to $valid['email']
+        }
+
         return redirect(route('home'));
 
     }

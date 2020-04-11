@@ -4,6 +4,10 @@
     ToDo - Edit
 @endsection
 
+@section('script')
+    <script src="{{ asset('js/edit_todo/events.js') }}" defer></script>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -44,7 +48,7 @@
                                     <a type="button" class="btn btn-outline-success" href="{{back()->getTargetUrl()}}"
                                        placeholder="subject">back
                                     </a>
-                                    <button type="submit" class="btn btn-success ml-1"
+                                    <button type="submit" class="btn btn-success ml-1" id="submit"
                                             placeholder="subject">{{$todo ? 'edit' : 'add new'}}
                                     </button>
                                 </div>
