@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => 'auth', 'namespace' => 'ToDo', 'prefix' => 'todo'], function () {
+Route::group(['middleware' => ['auth', 'check.id'], 'namespace' => 'ToDo', 'prefix' => 'todo'], function () {
     Route::get('/edit/{id?}', 'EditToDoController@index')->name('showTodo');
     Route::post('/edit/apply/{id?}', 'EditToDoController@edit')->name('apply');
     Route::post('/trash', 'EditToDoController@trash')->name('trash');
