@@ -41,8 +41,15 @@ class EditToDoController extends Controller
 
     }
 
-    public function trash($id)
+    public function trash(Request $request)
     {
 
+        $valid = $request->validate([
+            'trash' => 'required|exists:todos,id'
+        ]);
+
+        Todos::find($valid['trash'])->delete();
+
+        return redirect(route('home'));
     }
 }

@@ -4,6 +4,10 @@
     ToDo - Home
 @endsection
 
+@section('script')
+    <script src="{{ asset('js/functions.js') }}" defer></script>
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -27,7 +31,8 @@
                                 <td>{{$todo->id}}</td>
                                 <td>{{$todo->date}}</td>
                                 <td>{{$todo->subject}}</td>
-                                <td data-original-title="Tooltip on top" title="show full text"><a href="#">{{$todo->resume}}</a></td>
+                                <td data-original-title="Tooltip on top" title="show full text"><a
+                                        href="#">{{$todo->resume}}</a></td>
                                 <td class="text-right">
                                     <a type="button" rel="tooltip"
                                        class="btn btn-success btn-sm"
@@ -35,12 +40,12 @@
                                        data-original-title="Tooltip on top" title="Edit">
                                         <i class="fas fa-pen"></i>
                                     </a>
-                                    <a type="button" rel="tooltip"
-                                       class="btn btn-danger btn-sm"
-                                       href="#"
-                                       data-original-title="Tooltip on top" title="Delete">
+                                    <button type="button" rel="tooltip"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="trash({{$todo->id}})"
+                                            data-original-title="Tooltip on top" title="Delete">
                                         <i class="fas fa-trash"></i>
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,7 +55,7 @@
                         <tr>
                             <th colspan="4"></th>
                             <th class="text-right">
-                                <a type="button" rel="tooltip" id="add-todo"
+                                <a type="button" rel="tooltip"
                                    href="{{route('showTodo')}}"
                                    class="btn btn-success btn-link btn-sm"
                                    data-original-title="Tooltip on top" title="Add" disabled>
@@ -64,4 +69,8 @@
             </div>
         </div>
     </div>
+    <form method="post" action="{{route('trash')}}" id="send-trash" hidden>
+        <input type="text" id="trash" name="trash">
+        @csrf
+    </form>
 @endsection
