@@ -5,3 +5,7 @@ function trash(id) {
     $('#send-trash').submit();
 
 }
+
+function showFullText(el) {
+    swal.fire($(el).attr('full-text'))
+}

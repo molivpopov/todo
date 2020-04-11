@@ -32,7 +32,7 @@
                                 <td>{{$todo->date}}</td>
                                 <td>{{$todo->subject}}</td>
                                 <td data-original-title="Tooltip on top" title="show full text"><a
-                                        href="#">{{$todo->resume}}</a></td>
+                                        href="#" full-text="{{$todo->full_text}}" onclick="showFullText(this)">{{$todo->resume}}</a></td>
                                 <td class="text-right">
                                     <a type="button" rel="tooltip"
                                        class="btn btn-success btn-sm"
