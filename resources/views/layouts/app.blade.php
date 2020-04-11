@@ -22,6 +22,8 @@
 
     <link href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" rel="stylesheet">
 
+    <link rel="icon" type="image/png" href="{{asset('favicon.png')}}">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
