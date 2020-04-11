@@ -21,26 +21,37 @@
                         </tr>
                         </thead>
                         <tbody id="tbl-accruals">
-                        <tr>
-                            <td>1</td>
-                            <td>20 jan 2020</td>
-                            <td>big day</td>
-                            <td data-original-title="Tooltip on top" title="show full text"><a href="#">hi, please use...</a></td>
-                            <td class="text-right">
-                                <a type="button" rel="tooltip"
-                                   class="btn btn-success btn-sm"
-                                   href="{{route('index')}}"
-                                   data-original-title="Tooltip on top" title="Edit">
-                                    <i class="fas fa-pen"></i>
-                                </a>
-                            </td>
-                        </tr>
+
+                        @foreach($todos as $todo)
+                            <tr>
+                                <td>{{$todo->id}}</td>
+                                <td>{{$todo->date}}</td>
+                                <td>{{$todo->subject}}</td>
+                                <td data-original-title="Tooltip on top" title="show full text"><a href="#">{{$todo->resume}}</a></td>
+                                <td class="text-right">
+                                    <a type="button" rel="tooltip"
+                                       class="btn btn-success btn-sm"
+                                       href="{{route('showTodo', ['id'=>$todo->id])}}"
+                                       data-original-title="Tooltip on top" title="Edit">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a type="button" rel="tooltip"
+                                       class="btn btn-danger btn-sm"
+                                       href="#"
+                                       data-original-title="Tooltip on top" title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+
                         </tbody>
                         <tfoot class="text-primary">
                         <tr>
                             <th colspan="4"></th>
                             <th class="text-right">
-                                <a type="button" rel="tooltip" id="add-accruals"
+                                <a type="button" rel="tooltip" id="add-todo"
+                                   href="{{route('showTodo')}}"
                                    class="btn btn-success btn-link btn-sm"
                                    data-original-title="Tooltip on top" title="Add" disabled>
                                     <i class="far fa-calendar-plus"></i>

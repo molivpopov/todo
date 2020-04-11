@@ -11,18 +11,18 @@
                 <div class="card">
                     <div class="card-header">Edit</div>
                     <div class="card-body">
-                        <form method="post" action="{{route('apply')}}">
+                        <form method="post" action="{{route('apply', ['id' => $todo ? $todo->id : null])}}">
                             @csrf
                             <div class="col-sm-8">
 
-                                @include('toDo.includes.textGroup', ['name' => 'date'])
-                                @include('toDo.includes.textGroup', ['name' => 'subject'])
-                                @include('toDo.includes.textGroup', ['name' => 'not_email'])
+                                @include('toDo.includes.textGroup', ['name' => 'date', 'val' => $todo ? $todo->date : null])
+                                @include('toDo.includes.textGroup', ['name' => 'subject', 'val' => $todo ? $todo->subject : null])
+                                @include('toDo.includes.textGroup', ['name' => 'resume', 'val' => $todo ? $todo->resume : null])
+                                @include('toDo.includes.textGroup', ['name' => 'email', 'val' => $todo ? $todo->email : null])
 
                                 <div class="input-group mt-1">
-                                        <textarea type="text" name="text" class="form-control  @error('text') is-invalid @enderror"
-                                                  value=""
-                                                  placeholder="full text"></textarea>
+                                        <textarea type="text" name="full_text" class="form-control  @error('text') is-invalid @enderror"
+                                                  placeholder="full text">{{$todo ? $todo->full_text : null}}</textarea>
                                     @error('text')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,8 +41,11 @@
                                     </div>
                                 </div>
                                 <div class="input-group mt-1">
-                                    <button type="submit" class="btn btn-success"
-                                            placeholder="subject">send
+                                    <a type="button" class="btn btn-outline-success" href="{{back()->getTargetUrl()}}"
+                                       placeholder="subject">back
+                                    </a>
+                                    <button type="submit" class="btn btn-success ml-1"
+                                            placeholder="subject">{{$todo ? 'edit' : 'add new'}}
                                     </button>
                                 </div>
                             </div>
