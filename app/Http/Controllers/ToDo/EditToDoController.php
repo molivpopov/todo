@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ToDo;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMail;
 use App\Models\Todos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class EditToDoController extends Controller
         ]);
     }
 
-    public function edit($id = null, Request $request)
+    public function edit(Request $request, $id = null)
     {
 
         $valid = $request->validate([
@@ -32,14 +33,15 @@ class EditToDoController extends Controller
         $valid['user'] = Auth::id();
         $valid['date'] = date('Y-m-d', strtotime($valid['date']));
 
-        Todos::updateOrCreate(
+        $todo = Todos::updateOrCreate(
             ['id' => $id],
             $valid
         );
 
+        $todo = $todo->with('users')->find($todo->id);
+
         if ($request->get('notification') == 'true'){
-            dd('send mail');
-            // todo: send email to $valid['email']
+            SendMail::dispatch($todo);
         }
 
         return redirect(route('home'));
