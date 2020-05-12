@@ -35,9 +35,9 @@ class EditToDoController extends Controller
         $todo = Todos::updateOrCreate(
             ['id' => $id],
             $valid
-        );
-
-        $todo = $todo->with('users')->find($todo->id);
+        )
+            ->with('users')
+            ->first();
 
         if ($request->get('notification') == 'true') {
             SendMail::dispatch($todo);
