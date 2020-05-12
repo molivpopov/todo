@@ -14,8 +14,7 @@ class EditToDoController extends Controller
     {
 
         return view('toDo.toDo', [
-            'todo' => Todos::where('id', $id)
-                ->get()->first()
+            'todo' => Todos::where('id', $id)->first()
         ]);
     }
 
@@ -40,7 +39,7 @@ class EditToDoController extends Controller
 
         $todo = $todo->with('users')->find($todo->id);
 
-        if ($request->get('notification') == 'true'){
+        if ($request->get('notification') == 'true') {
             SendMail::dispatch($todo);
         }
 
@@ -58,5 +57,13 @@ class EditToDoController extends Controller
         Todos::find($valid['trash'])->delete();
 
         return redirect(route('home'));
+    }
+
+    public function isAcronym($a, $b)
+    {
+        return array_diff_assoc(
+            array_count_values(str_split($a)),
+            array_count_values(str_split($b))
+        );
     }
 }
